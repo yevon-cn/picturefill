@@ -8,7 +8,7 @@
 		<script src="picturefill.js"></script>
 		<style>
 			body { font-family: sans-serif }
-			img {  max-width: 100% }
+			img { max-width: 100%; }
 		</style>
 	</head>
 	<body>
@@ -16,15 +16,30 @@
 		<h1>Picturefill: A &lt;picture&gt; element polyfill</h1>
 				
 		<p>For more info: <a href="http://github.com/scottjehl/picturefill">see project home.</a></p>
-		
-		<div data-picture data-alt="A giant stone face at The Bayon temple in Angkor Thom, Cambodia">
-			<div data-src="external/imgs/small.jpg"></div>
-			<div data-src="external/imgs/medium.jpg" data-media="(min-width: 400px)"></div>
-			<div data-src="external/imgs/large.jpg" data-media="(min-width: 800px)"></div>
-			<div data-src="external/imgs/extralarge.jpg" data-media="(min-width: 1000px)"></div>
+		<section>
+			<h1><code>srcset</code> on source elements only</h1>
+			<div data-picture data-alt="A giant stone face at The Bayon temple in Angkor Thom, Cambodia">
+				<div data-srcset="external/imgs/small.jpg 1x, external/imgs/small2x.jpg 2x"></div>
+				<div data-media="(min-width: 25em)" data-srcset="external/imgs/medium.jpg 1x, external/imgs/medium2x.jpg 2x"></div>
+				<div data-media="(min-width: 50em)" data-srcset="external/imgs/large.jpg 1x, external/imgs/large2x.jpg 2x"></div>
+				<div data-media="(min-width: 62.5em)" data-srcset="external/imgs/extralarge.jpg 1x, external/imgs/extralarge2x.jpg 2x"></div>
 
-			<!-- Fallback content for non-JS browsers. Same img src as the initial, unqualified source element. -->
-			<noscript><img src="external/imgs/small.jpg" alt="A giant stone face at The Bayon temple in Angkor Thom, Cambodia"></noscript>
-		</div>
+				<!-- Fallback content for non-JS browsers. Same img src as the initial, unqualified source element. -->
+				<noscript><img src="external/imgs/small.jpg" alt="A giant stone face at The Bayon temple in Angkor Thom, Cambodia"></noscript>
+			</div>
+		</section>
+		<section>
+			<h1><code>srcset</code> specified on <code>picture</code> element itself.</h1>
+			<div data-picture data-alt="A giant stone face at The Bayon temple in Angkor Thom, Cambodia" data-srcset="external/imgs/medium.jpg 1x, external/imgs/medium2x.jpg 2x">
+				<div data-media="(min-width: 800px)" data-srcset="external/imgs/large.jpg 1x, external/imgs/large2x.jpg 2x"></div>
+				<noscript><img src="external/imgs/small.jpg" alt="A giant stone face at The Bayon temple in Angkor Thom, Cambodia"></noscript>
+			</div>
+		</section>
+		<section>
+			<h1><code>srcset</code> specified on <code>img</code> tag.</h1>
+			<p><strong>Note:</strong> Will result in a redundant request.</p>
+			<img data-alt="A giant stone face at The Bayon temple in Angkor Thom, Cambodia" data-srcset="external/imgs/medium.jpg 1x, external/imgs/medium2x.jpg 2x" />
+			<noscript><img src="external/imgs/small.jpg"></noscript>
+		</section>
 	</body>
 </html>
