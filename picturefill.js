@@ -66,7 +66,6 @@
 								// When the image is loaded, set a width equal to that of the original’s intrinsic width divided by the screen resolution:
 								newImg.onload = function( e ) {
 										this.style.maxWidth = this.cloneNode( true ).width / resMatch + "px";
-										alert( window.getComputedStyle( this.cloneNode( true ) ).width );
 										// Clone the original image into memory so the width is unaffected by page styles:
 								};
 								picImg.parentNode.replaceChild( newImg, picImg );
